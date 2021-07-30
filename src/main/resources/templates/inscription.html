@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+<meta charset="utf-8"/>
+<title>Saisie des logement</title>
+<link rel="stylesheet" 	type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"  />
+
+</head>
+<body layout:fragment="content">
+    <div class="col-md-5 col-xs-12 spacer col-md-offset-3" >
+<div class="panel panel-default col-md6 col-xs-12">
+<div class="panel-heading text-center">S'inscrire'</div><br/><br/>
+<div class="panel-body">
+    <form th:action="@{SaveClient}" method="post" th:object="${client}"  >
+
+
+        
+<div class="form-group">
+<label class="control-label">Nom et prénom:</label>
+<input type="text" th:field="*{nomC}" class="form-control" />
+<span class="text-danger" th:errors="*{nomC}"></span>
+</div>
+
+<div class="form-group">
+<label class="control-label">Email:</label>
+<input type="text" th:field="*{email}" class="form-control" />
+<span class="text-danger" th:errors="*{email}"></span>
+</div>
+
+<div class="form-group">
+<label class="control-label">Username:</label>
+<input type="text" th:field="*{username}" class="form-control" />
+<span class="text-danger" th:errors="*{username}"></span>
+</div>
+
+<div class="form-group">
+<label class="control-label">password:</label>
+<input type="text" th:field="*{password}" class="form-control" />
+<span class="text-danger" th:errors="*{password}"></span>
+</div>
+
+<div class="form-group">
+<label class="control-label">tel</label>
+<input type="text" th:field="*{tel}" class="form-control" />
+<span class="text-danger" th:errors="*{tel}"></span>
+</div>
+
+
+<button type="submit" class="btn btn-primary" >s'inscrire</button>
+    </form>
+
+
+
+</div>
+
+</div>
+</div>
+
+
+
+</body>
+</html>

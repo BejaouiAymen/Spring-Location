@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="utf-8"/>
+<title>Saisie des logement</title>
+<link rel="stylesheet" 	type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"  />
+<link rel="stylesheet" 	type="text/css" href="../static/css/myStyle.css" th:href="@{/css/myStyle.css}"  />
+</head>
+<body>
+  <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <ul class="nav navbar-nav navbar-dark bg-dark">
+                <li class="nav-item"><a th:href="@{/consulter}" class="nav-link">chercher</a></li>
+                <li class="nav-item"><a th:href="@{/admin/ajoutlog}" class="nav-link">ajouter</a></li>
+                <li class="nav-item"><a class="nav-link" th:text="${#httpServletRequest.remoteUser}" ></a></li>
+                <li class="nav-item"><a th:href="@{/login?logout}" class="nav-link" th:text="Logout" ></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="col-md-5 col-xs-12 spacer col-md-offset-3" >
+<div class="panel panel-default col-md6 col-xs-12">
+<div class="panel-heading">Saisie des logements</div>
+<div class="panel-body">
+
+
+
+    <form th:action="@{/admin/SaveLogement}" method="post" th:object="${logement}"  >
+
+
+<div class="form-group">
+<label class="control-label">Nom de logement:</label>
+<input type="text" th:field="*{nomLog}" class="form-control" />
+<span class="text-danger" th:errors="*{nomLog}"></span>
+</div>
+
+
+<div class="form-group">
+<label class="control-label">adresse de logement:</label>
+<input type="text" th:field="*{adresseLog}" class="form-control" />
+<span class="text-danger" th:errors="*{adresseLog}"></span>
+</div>
+
+
+<div class="form-group">
+<label class="control-label">superficie de logement</label>
+<input type="text" th:field="*{superficie}" class="form-control" />
+<span class="text-danger" th:errors="*{superficie}"></span>
+</div>
+
+
+<div class="form-group">
+<label class="control-label">prix:</label><br/>
+<input type="text" th:field="*{prix}" class="form-group"   />
+<span class="text-danger" th:errors="*{prix}"></span>
+</div>
+
+
+<div class="form-group">
+<label class="control-label">description:</label><br/>
+<textarea rows="4" cols="50" th:field="*{descriptionLog}" class="form-group">
+</textarea>
+<span class="text-danger" th:errors="*{descriptionLog}"></span>
+</div>
+
+<div class="form-group">
+<label class="control-label">type logement:</label><br/>
+<select th:field="*{typelog}">
+  <option th:each="type: ${TypeLoge}" th:text="${type.name}" th:value="${type}" ></option>
+
+
+</select>
+<span class="text-danger" th:errors="*{prix}"></span>
+</div>
+
+<button type="submit" class="btn btn-primary" >save</button>
+    </form>
+
+
+</div>
+</div>
+
+</div>
+
+
+
+
+</body>
+</html>

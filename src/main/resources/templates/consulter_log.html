@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<head>
+<meta charset="utf-8"/>
+<title>Liste Logement</title>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link rel="stylesheet" 	type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"  />
+<link rel="stylesheet" 	type="text/css" href="../static/js/bootstrap.min.js" th:href="@{/css/bootstrap.min.js}"  />
+<link rel="stylesheet" 	type="text/css" href="../static/css/myStyle.css" th:href="@{/css/myStyle.css}"  />
+</head>
+<body>
+
+
+
+<!--header-->
+   <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <ul class="nav navbar-nav navbar-dark bg-dark">
+                <li class="nav-item"><a th:href="@{/consulter}" class="nav-link">chercher</a></li>
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item"><a th:href="@{/admin/ajoutlog}" class="nav-link">ajouter</a></li>
+                <li class="nav-item"><a class="nav-link" th:text="${#httpServletRequest.remoteUser}" ></a></li>
+                <li class="nav-item"><a th:href="@{/login?logout}" class="nav-link" th:text="Logout" ></a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+<!--recherche-->
+<div class="container spacer">
+<form th:action="@{/consulter}" method="POST">
+<div class="form-group">
+    <label>Mot Clé:</label>
+    <input type="text" name="motCle" th:value="${motCle}" />
+    <button type="submit" class="btn btn-primary">chercher</button>
+</div>
+</form>
+</div>
+
+<!--datatable-->
+    <div class="container spacer">
+<table class="table table-stripped">
+<thead>
+<tr>
+<th>ID</th> <th>nom</th> <th>Description</th> <th>Adresse</th> <th>prix</th> <th> superficie</th> <th>Type Logement</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="e:${PageLogement.content}">
+<td th:text="${e.idLog}"></td>
+<td th:text="${e.nomLog}"></td>
+<td th:text="${e.descriptionLog}"></td>
+<td th:text="${e.adresseLog}"></td>
+<td th:text="${e.prix}"></td>
+<td th:text="${e.superficie}"></td>
+<td th:text="${e.typelog.name}"></td>
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+<td ><a  onclick="return confirm('etes vous sure de vouloir supprimer?') " th:href="@{/admin/delete(id=${e.idLog})}">Delete</a></td></div>
+<div sec:authorize="hasRole('ROLE_ADMIN')"><td ><a  th:href="@{/admin/edit(id=${e.idLog})}">Edit</a></td></div>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<div class="container">
+<ul class="nav-pills pagination">
+    <li  th:each="p,status:${pages}" th:class="${p==pageCourante}?active" class="nav"  >
+        <a th:href="@{/consulter(page=${p},motCle=${motCle})}" th:text="${status.index}"></a>
+    </li>
+</ul>
+</div>
+
+
+
+</body>
+</html>

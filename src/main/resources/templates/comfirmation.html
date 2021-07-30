@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="utf-8"/>
+<title>comfirmation</title>
+
+<link rel="stylesheet" 	type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"  />
+<link rel="stylesheet" 	type="text/css" href="../static/js/bootstrap.min.js" th:href="@{/css/bootstrap.min.js}"  />
+<link rel="stylesheet" 	type="text/css" href="../static/css/myStyle.css" th:href="@{/css/myStyle.css}"  />
+</head>
+<body >
+
+  <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <ul class="nav navbar-nav navbar-dark bg-dark">
+                <li class="nav-item"><a th:href="@{/consulter}" class="nav-link">chercher</a></li>
+                <li class="nav-item" sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/ajoutlog}" class="nav-link">ajouter</a></li>
+                <li class="nav-item"><a class="nav-link" th:text="${#httpServletRequest.remoteUser}" ></a></li>
+                <li class="nav-item"><a th:href="@{/login?logout}" class="nav-link" th:text="Logout" ></a></li>
+            </ul>
+        </nav>
+    </header>
+  
+<div class="container">
+<div class="panel panel-default">
+<div class="panel-heading">Comfirmation</div>
+<div class="panel-body">
+
+    <div class="form-group">
+       <label class="control-label">Nom de logement:</label>
+       <label th:text="${log.nomLog}"></label><br/>
+        <label class="control-label">adresse de logement:</label>
+        <label th:text="${log.adresseLog}"></label><br/>
+        <label class="control-label">prix:</label>
+        <label th:text="${log.prix}"></label><br/>
+        <label class="control-label">description:</label>
+        <label th:text="${log.descriptionLog}"></label><br/>
+        <label class="control-label">superficie de logement</label>
+        <label th:text="${log.superficie}"></label><br/>
+    </div>
+
+</div>
+</div>
+</div>
+
+</body>
+</html>
